@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  # Servidor de Banco de Dados
+  db:
+    image: mysql:5.7
+    container_name: mysql_container
+    restart: always
+    environment:
+      # Defina aqui o nome do banco e a senha (os mesmos que usará no db.php)
+      MYSQL_DATABASE: marcar_consulta
+      MYSQL_ROOT_PASSWORD: samuel06
+    volumes:
+      # O Docker executa automaticamente qualquer .sql dentro desta pasta na primeira vez
+      - ./sql:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+
+  # Servidor Web (PHP + Apache)
+  web:
+    image: php:8.0-apache
+    container_name: php_container
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      # Mapeia a raiz do seu projeto para a pasta do servidor web
+      - ./:/var/www/html
+    depends_on:
+      - db
+
+
+
+
+      
