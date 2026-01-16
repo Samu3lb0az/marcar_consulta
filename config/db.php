@@ -1,7 +1,7 @@
 <?php
 $servidor = "db";
 $usuario = "root";
-$senha = "";
+$senha = "samuel06";
 $banco = "marcar_consulta";
 
 try {
